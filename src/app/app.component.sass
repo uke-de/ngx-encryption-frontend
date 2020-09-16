@@ -1,0 +1,77 @@
+@import "sample-theme"
+
+@include mat-core()
+
+$app-enc-primary: mat-palette($primarycolor)
+$app-enc-accent:  mat-palette($secondarycolor)
+
+$app-enc-theme: mat-light-theme($app-enc-primary, $app-enc-accent)
+
+@include mat-core($main-typography)
+
+@include angular-material-theme($app-enc-theme)
+
+
+
+.encryption-main-app
+  padding: 2em calc(10vw - 30px)
+
+  .page-header
+    max-width: 1000px
+    margin: 0 auto 48px
+
+    display: flex
+    flex-flow: row nowrap
+    justify-content: space-between
+
+    line-height: 1.8em
+    text-align: right
+
+    .page-logo
+      margin-right: 1em
+
+      img
+        flex: 0 0
+        height: $logo-height
+        width: $logo-width
+
+    .page-heading
+      flex: 1 0
+      font-size: 1.5em
+      font-weight: bold
+
+      .small
+        font-size: 75%
+        font-weight: normal
+
+  .valign-middle
+    display: flex
+    flex-flow: column nowrap
+    justify-content: space-around
+
+
+
+  .page-footer
+    max-width: 1000px
+    margin: 60px auto
+    padding: 12px
+
+    border-top: 1px solid #d7d7d7
+
+    display: flex
+    flex-flow: row wrap
+    justify-content: center
+
+    font-size: .9em
+
+    p, p a
+      color: #b5b5b5
+
+    & > p::after
+      content: "-"
+      margin: 0 6px
+
+    & > p:last-child::after
+      content: ""
+      margin: 0
+

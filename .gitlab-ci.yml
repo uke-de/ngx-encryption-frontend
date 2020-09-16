@@ -1,0 +1,17 @@
+build:
+  image: node:latest
+  stage: build
+  tags:
+    - docker
+  only:
+    - tags
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - npm install --quiet
+    - ./git-version.sh
+    - npm run build
+  artifacts:
+    paths:
+      - dist/

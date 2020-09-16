@@ -1,0 +1,244 @@
+{
+  "app.title": {
+    "en": "Web Encryption Frontend",
+    "de": "Verschlüsselungportal"
+  },
+
+
+  "app.vendor": {
+    "en": "University Medical Center Hamburg-Eppendorf",
+    "de": "Universitätsklinikum Hamburg-Eppendorf"
+  },
+
+
+  "label.encryptionKey": {
+    "en": "Encryption Key",
+    "de": "Schlüssel für die Verschlüsselung"
+  },
+
+  "label.decryptionKey": {
+    "en": "Decryption Key",
+    "de": "Schlüssel für die Entschlüsselung"
+  },
+
+  "label.key.generated": {
+    "en": "generated",
+    "de": "generiert"
+  },
+
+  "label.key.importedFrom": {
+    "en": "imported from",
+    "de": "importiert aus"
+  },
+
+  "label.generateOrImportEncryptionKey": {
+    "en": "Generate or import encryption key",
+    "de": "Schlüssel generieren oder Schlüsseldatei importieren"
+  },
+  "label.importDecryptionKey": {
+    "en": "Import decryption key",
+    "de": "Schlüssel importieren"
+  },
+  "label.randomKeyGenerated": {
+    "en": "Random key generated",
+    "de": "zufälliger Schlüssel generiert"
+  },
+  "label.keyImportedFrom": {
+    "en": "Key imported from",
+    "de": "Schlüssel importiert aus"
+  },
+  "label.encryptAFile": {
+    "en": "Encrypt a file",
+    "de": "Datei verschlüsseln"
+  },
+  "label.decryptAFile": {
+    "en": "Decrypt a file",
+    "de": "Datei entschlüsseln"
+  },
+  "label.fileToEncrypt": {
+    "en": "File to encrypt",
+    "de": "Zu verschlüsselnde Datei"
+  },
+  "label.fileToDecrypt": {
+    "en": "Encrypted file",
+    "de": "Verschlüsselte Datei"
+  },
+  "label.selectFileToEncrypt": {
+    "en": "Select file to encrypt",
+    "de": "Zu verschlüsselnde Datei auswählen"
+  },
+  "label.selectFileToDecrypt": {
+    "en": "Select file to decrypt",
+    "de": "Zu entschlüsselnde Datei auswählen"
+  },
+  "label.openFileToEncrypt": {
+    "en": "Open File to encrypt",
+    "de": "Datei auswählen"
+  },
+  "label.openFileToDecrypt": {
+    "en": "Open File to decrypt",
+    "de": "Datei auswählen"
+  },
+  "label.downloadKeyFileAndEncryptedFile": {
+    "en": "Download keyfile and encrypted file",
+    "de": "Schlüsseldatei und verschlüsselte Datei herunterladen"
+  },
+  "label.downloadDecryptedFile": {
+    "en": "Download decrypted file",
+    "de": "Entschlüsselte Datei herunterladen"
+  },
+  "label.protectKeyFileWithPassword": {
+    "en": "Protect keyfile with a password",
+    "de": "Schlüsseldatei mit Passwort schützen"
+  },
+  "label.passwordToEncryptKeyFile": {
+    "en": "Password to encrypt the keyfile with",
+    "de": "Passwort zum Verschlüsseln der Schlüsseldatei"
+  },
+  "label.confirmPassword": {
+    "en": "Confirm password",
+    "de": "Passwort wiederholen"
+  },
+  "label.keyfileIsEncrypted": {
+    "en": "Keyfile is encrypted",
+    "de": "Schlüsseldatei ist verschlüsselt"
+  },
+  "label.recipient": {
+    "en": "Recipient",
+    "de": "Empfänger"
+  },
+  "label.uploadFileSendKey": {
+    "en": "Send key file via e-mail (optional)",
+    "de": "Schlüsseldatei per E-Mail senden (optional)"
+  },
+
+
+  "text.max": {
+    "en": "max",
+    "de": "max"
+  },
+  "text.keyfile": {
+    "en": "Keyfile",
+    "de": "Schlüsseldatei"
+  },
+  "text.min8Characters": {
+    "en": "min. 8 characters",
+    "de": "min. 8 Zeichen"
+  },
+  "text.sourceCode": {
+    "en": "Source code",
+    "de": "Quellcode"
+  },
+
+
+  "tooltip.showPassword": {
+    "en": "Show password",
+    "de": "Passwort anzeigen"
+  },
+
+
+  "button.ok": {
+    "en": "OK",
+    "de": "OK"
+  },
+  "button.cancel": {
+    "en": "Cancel",
+    "de": "Abbrechen"
+  },
+  "button.importKeyfile": {
+    "en": "Import Keyfile",
+    "de": "Schlüsseldatei importieren"
+  },
+  "button.generateNewKey": {
+    "en": "Generate new key",
+    "de": "Neuen Schlüssel generieren"
+  },
+  "button.sendKeyEmail": {
+    "en": "Send key via e-mail",
+    "de": "Schlüsseldatei per E-Mail senden"
+  },
+  "button.downloadKeyFile": {
+    "en": "Download keyfile",
+    "de": "Schlüsseldatei herunterladen"
+  },
+  "button.encryptAndDownloadFile": {
+    "en": "Encrypt and download file",
+    "de": "Datei verschlüsseln und herunterladen"
+  },
+  "button.decryptAndDownloadFile": {
+    "en": "Decrypt and download file",
+    "de": "Datei entschlüsseln und herunterladen"
+  },
+  "button.importWrappingKey": {
+    "en": "Open private key to decrypt keyfile",
+    "de": "Privaten Schlüssel öffnen"
+  },
+
+
+  "input.enterPassword": {
+    "en": "Enter password",
+    "de": "Passwort eingeben"
+  },
+
+
+  "progress.readingFile": {
+    "en": "Reading file...",
+    "de": "Datei lesen..."
+  },
+  "progress.encrypting": {
+    "en": "Encrypting...",
+    "de": "Verschlüsseln..."
+  },
+  "progress.decrypting": {
+    "en": "Decrypting...",
+    "de": "Verschlüsseln..."
+  },
+  "progress.finished": {
+    "en": "Finished.",
+    "de": "Fertig."
+  },
+  "progress.error": {
+    "en": "Error.",
+    "de": "Fehler."
+  },
+
+
+  "notice.encryptingFileX": {
+    "en": "Encrypting file {$filename}...",
+    "de": "{$filename} wird verschlüsselt..."
+  },
+  "notice.decryptingFileX": {
+    "en": "Decrypting file {$filename}...",
+    "de": "{$filename} wird entschlüsselt..."
+  },
+  "notice.encryptedFileInTDownloading": {
+    "en": "File encrypted in {$seconds} s. Downloading...",
+    "de": "Datei in {$seconds} s verschlüsselt. Download startet..."
+  },
+  "notice.decryptedFileInTDownloading": {
+    "en": "File decrypted in {$seconds} s. Downloading...",
+    "de": "Datei in {$seconds} s entschlüsselt. Download startet..."
+  },
+  "notice.restartingDownloadEncrypted": {
+    "en": "Restarting download of encrypted file...",
+    "de": "Download wird neu gestartet..."
+  },
+  "notice.restartingDownloadDecrypted": {
+    "en": "Restarting download of encrypted file...",
+    "de": "Download wird neu gestartet..."
+  },
+
+
+  "error.keyfileImportFailed": {
+    "en": "Key file import failed {$filename}.",
+    "de": "Fehler beim Import der Schlüsseldatei {$filename}."
+  },
+  "error.downloadKeyFile": {
+    "en": "Could not download the keyfile",
+    "de": "Fehler beim Download der Schlüsseldatei"
+  },
+  "error.fileTooLarge": {
+    "en": "Input file {$filename} is too large.",
+    "de": "Datei {$filename} ist zu groß."
+  }
+}

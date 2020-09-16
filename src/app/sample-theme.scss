@@ -1,0 +1,78 @@
+@import 'node_modules/@angular/material/theming';
+
+$main-typography: mat-typography-config(
+  $font-family: '"Open Sans", sans-serif'
+);
+
+$logo-width: auto;
+$logo-height: auto;
+
+// Created with http://mcg.mbitson.com/
+
+$primarycolor: (
+  50 : #e1e9f2,
+  100 : #b3c9df,
+  200 : #80a5c9,
+  300 : #4d80b3,
+  400 : #2765a3,
+  500 : #014a93,
+  600 : #01438b,
+  700 : #013a80,
+  800 : #013276,
+  900 : #002264,
+  A100 : #94afff,
+  A200 : #6188ff,
+  A400 : #2e62ff,
+  A700 : #144fff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$secondarycolor: (
+  50 : #fbe5e4,
+  100 : #f4bfbb,
+  200 : #ed948e,
+  300 : #e56960,
+  400 : #e0493e,
+  500 : #da291c,
+  600 : #d62419,
+  700 : #d01f14,
+  800 : #cb1911,
+  900 : #c20f09,
+  A100 : #ffeded,
+  A200 : #ffbbba,
+  A400 : #ff8987,
+  A700 : #ff706e,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+

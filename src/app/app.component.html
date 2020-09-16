@@ -1,0 +1,28 @@
+<div class="encryption-main-app">
+
+  <div class="page-header">
+    <div class="page-logo"><!--<img src="assets/logo.svg" alt=""/>--></div>
+    <div class="page-heading valign-middle">
+      <p i18n="@@app.title">Web Encryption Frontend</p>
+    </div>
+  </div>
+
+
+  <app-encryption mode="encrypt" [publicKeys]="publicKeys"></app-encryption>
+
+  <app-encryption mode="decrypt"></app-encryption>
+
+
+  <div class="page-footer">
+    <p><ng-container i18n="@@app.title">Web Encryption Frontend</ng-container
+    >&nbsp;<span class="version">{{versionShort}}</span></p>
+
+    <p>&copy; {{ buildYear }}
+      <ng-container i18n="@@app.vendor">University Medical Center Hamburg-Eppendorf</ng-container></p>
+
+    <p><a href="https://github.com/"
+          i18n="@@text.sourceCode">Soure code</a></p>
+  </div>
+
+
+</div>

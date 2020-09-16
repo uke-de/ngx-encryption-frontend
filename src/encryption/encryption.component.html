@@ -1,0 +1,255 @@
+<div class="encryption-component">
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+
+        <mat-panel-title>
+          <ng-container *ngIf="isEncryptMode" i18n="@@label.encryptAFile">Encrypt a file</ng-container>
+          <ng-container *ngIf="isDecryptMode" i18n="@@label.decryptAFile">Decrypt a file</ng-container>
+        </mat-panel-title>
+
+
+        <mat-panel-description>
+          <div class="progress-indicator" *ngIf="currentStep != Steps.Idle">
+            <div class="progress-text">
+              <span *ngIf="currentStep == Steps.Loading" i18n="@@progress.readingFile">Reading file...</span>
+              <span *ngIf="currentStep == Steps.Encrypting && isEncryptMode"  i18n="@@progress.encrypting">Encrypting...</span>
+              <span *ngIf="currentStep == Steps.Encrypting && isDecryptMode" i18n="@@progress.decrypting">Decrypting...</span>
+              <span *ngIf="currentStep == Steps.Finished" i18n="@@progress.finished">Finished.</span>
+              <span *ngIf="currentStep == Steps.Error && isEncryptMode" i18n="@@progress.error">Error.</span>
+              <span *ngIf="currentStep == Steps.Error && isDecryptMode" i18n="@@progress.error">Error.</span>
+            </div>
+
+            <mat-progress-bar *ngIf="currentStep != Steps.Error"
+                              [mode]="currentProgress >= 0?'determinate':'indeterminate'"
+                              [value]="currentProgress"></mat-progress-bar>
+          </div>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-divider></mat-divider>
+
+
+
+      <form>
+
+        <mat-vertical-stepper linear="false">
+
+          <ng-template matStepperIcon="edit">
+            <mat-icon>done</mat-icon>
+          </ng-template>
+
+
+          <mat-step [completed]="inputFile">
+
+            <ng-template matStepLabel>
+              <ng-container *ngIf="inputFile; else selectFile">
+                <ng-container *ngIf="isEncryptMode" i18n="@@label.fileToEncrypt">File to encrypt</ng-container>
+                <ng-container *ngIf="isDecryptMode" i18n="@@label.fileToDecrypt">File to decrypt</ng-container>
+                <span class="filename colon-before">{{inputFile.name}} ({{inputFile.size|byteFormat}})</span>
+              </ng-container>
+
+              <ng-template #selectFile>
+                <ng-container *ngIf="isEncryptMode" i18n="@@label.selectFileToEncrypt">Select file to encrypt</ng-container>
+                <ng-container *ngIf="isDecryptMode" i18n="@@label.selectFileToDecrypt">Select file to decrypt</ng-container>
+              </ng-template>
+            </ng-template>
+
+
+            <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">
+              <ng-container *ngIf="isEncryptMode" i18n="@@label.openFileToEncrypt">Open File to encrypt</ng-container>
+              <ng-container *ngIf="isDecryptMode" i18n="@@label.openFileToDecrypt">Open File to decrypt</ng-container>
+            </button>
+            <input #fileInput hidden type="file" (change)="onInputFileSelect(fileInput.files[0])">
+
+            <mat-form-field>
+              <mat-label>
+                <ng-container *ngIf="isEncryptMode" i18n="@@label.fileToEncrypt">File to encrypt</ng-container>
+                <ng-container *ngIf="isDecryptMode" i18n="@@label.fileToDecrypt">File to decrypt</ng-container>
+                (<ng-container i18n="@@text.max">max</ng-container>. {{ maxFileSize|byteFormat }})
+              </mat-label>
+              <input matInput [value]="inputFile?.name || ''" readonly="true" placeholder="Generate or import a key...">
+            </mat-form-field>
+
+          </mat-step>
+
+
+          <mat-step [completed]="inputKey">
+
+            <ng-template matStepLabel>
+              <ng-container i18n="@@label.generateOrImportEncryptionKey"
+                            *ngIf="isEncryptMode">Generate or import encryption key</ng-container><!--
+           --><ng-container i18n="@@label.importDecryptionKey"
+                            *ngIf="isDecryptMode">Import decryption key</ng-container><!--
+
+           --><ng-container *ngIf="keySource == KeySource.Generated"
+            >: <ng-container i18n="@@label.randomKeyGenerated">Random key generated</ng-container></ng-container><!--
+
+           --><ng-container *ngIf="keySource == KeySource.Imported"
+            >: <ng-container i18n="@@label.keyImportedFrom"
+               >Key imported from</ng-container> {{inputKeyFile?.name}}</ng-container>
+            </ng-template>
+
+            <button *ngIf="isEncryptMode"
+                    mat-raised-button color="primary"
+                    i18n="@@button.generateNewKey"
+                    (click)="generateKey()">Generate new key</button>
+
+              <button mat-raised-button
+                      i18n="@@button.importKeyfile"
+                      (click)="keyFileInput.click()">Import Keyfile</button>
+              <input #keyFileInput hidden type="file"
+                     (change)="importKeyFile(keyFileInput.files[0]); keyFileInput.value = null;">
+
+              <mat-form-field>
+                <mat-label>
+                  <ng-container i18n="@@label.encryptionKey" *ngIf="isEncryptMode">Encryption Key</ng-container>
+                  <ng-container i18n="@@label.decryptionKey" *ngIf="isDecryptMode">Decryption Key</ng-container>
+
+                  <ng-container *ngIf="keySource == KeySource.Generated">
+                    (<ng-container i18n="@@label.key.generated">generated</ng-container>)
+                  </ng-container>
+
+                  <ng-container *ngIf="keySource == KeySource.Imported">
+                    (<ng-container i18n="@@label.key.importedFrom">imported from</ng-container>
+                    {{inputKeyFile?.name}})</ng-container>
+
+                </mat-label>
+                <input matInput
+                       readonly="true"
+                       [value]="inputKey ?
+                        (inputKey + '... (' + encryptionKeyLength + '-bit ' + encryptionAlgorithm + ')') :
+                        ''" >
+
+              </mat-form-field>
+
+          </mat-step>
+
+
+
+          <mat-step [completed]="keyFileDownloaded && currentStep == Steps.Finished">
+
+            <ng-template matStepLabel>
+              <ng-container *ngIf="isEncryptMode" i18n="@@label.downloadKeyFileAndEncryptedFile"
+                >Download keyfile and encrypted file</ng-container>
+              <ng-container *ngIf="isDecryptMode" i18n="@@label.downloadDecryptedFile"
+                >Download decrypted file</ng-container>
+            </ng-template>
+
+            <div class="keyfile-password-group" *ngIf="isEncryptMode">
+
+              <mat-checkbox name="encryptKeyfileCheckbox"
+                            color="primary"
+                            i18n="@@label.protectKeyFileWithPassword"
+                            [(ngModel)]="encryptKeyfile">Protect keyfile with a password</mat-checkbox>
+
+
+              <div class="keyfile-password" *ngIf="encryptKeyfile">
+                <mat-form-field>
+                  <mat-label>
+                    <ng-container i18n="@@label.passwordToEncryptKeyFile">Password to encrypt the keyfile with</ng-container>
+                    <span class="in-parentheses space-before" i18n="@@text.min8Characters">min. 8 characters</span>
+                  </mat-label>
+
+                  <input matInput
+                         [type]="keyfilePasswordVisible ? 'text' : 'password'"
+                         name="keyfilePassword"
+                         [(ngModel)]="keyfilePassword">
+
+                  <mat-icon matSuffix
+                            class="visibility-toggle"
+                            matTooltip="Show password"
+                            i18n-matTooltip="@@tooltip.showPassword"
+                            (click)="toggleKeyfilePasswordVisible()">
+                    {{keyfilePasswordVisible ? 'visibility' : 'visibility_off'}}
+                  </mat-icon>
+
+                </mat-form-field>
+
+                <ng-container *ngIf="!keyfilePasswordVisible">
+                  <mat-form-field>
+                    <mat-label i18n="@@label.confirmPassword">Confirm password</mat-label>
+                    <input matInput type="password" name="keyfilePasswordConfirm" [(ngModel)]="keyfilePasswordConfirm">
+
+                    <mat-icon matSuffix
+                              class="confirm-password-check"
+                              [matTooltip]="keyfilePassword == keyfilePasswordConfirm ?
+                              'Passwords match' : 'Passwords do not match'">
+                      {{keyfilePassword == keyfilePasswordConfirm ? 'check' : 'close'}}
+                    </mat-icon>
+                  </mat-form-field>
+                </ng-container>
+
+              </div>
+            </div>
+
+
+            <div class="step3">
+              <button mat-raised-button
+                      *ngIf="isEncryptMode"
+                      color="accent"
+                      (click)="downloadKeyFile()"
+                      [disabled]="!inputKey || !keyfilePasswordIsValid"
+                      [matTooltip]="!inputKey ? 'Please generate or import a key first' : 'Please check keyfile passwords'"
+                      [matTooltipDisabled]="inputKey"
+                      i18n="@@button.downloadKeyFile"
+              >Download Keyfile</button>
+
+
+              <button *ngIf="isEncryptMode"
+                      mat-raised-button
+                      color="primary"
+                      (click)="encryptAndDownload()"
+                      [disabled]="!inputFile || !inputKey || !keyFileDownloaded"
+                      matTooltip="Please download the keyfile first"
+                      [matTooltipDisabled]="!inputFile || !inputKey || keyFileDownloaded"
+                      i18n="@@button.encryptAndDownloadFile"
+              >Encrypt and download file</button>
+
+              <button *ngIf="isDecryptMode"
+                      mat-raised-button
+                      color="primary"
+                      (click)="encryptAndDownload()"
+                      [disabled]="!inputFile || !inputKey"
+                      i18n="@@button.decryptAndDownloadFile"
+              >Decrypt and download file</button>
+
+            </div>
+          </mat-step>
+
+
+
+
+          <mat-step [completed]="false" *ngIf="isEncryptMode">
+
+            <ng-template matStepLabel>
+              <ng-container i18n="@@label.uploadFileSendKey">Send key via e-mail</ng-container>
+            </ng-template>
+
+            <mat-form-field appearance="fill">
+              <mat-label i18n="@@label.recipient">Recipient</mat-label>
+              <mat-select [(value)]="emailRecipient">
+                <mat-option *ngFor="let pk of publicKeys" [value]="pk.name">
+                  {{pk.name}} ({{pk.email}})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary"
+                    i18n="@@button.sendKeyEmail"
+                    [disabled]="!inputKey || !emailRecipient"
+                    (click)="generateKeyfileEmail()">Send key via e-mail</button>
+
+          </mat-step>
+
+
+
+        </mat-vertical-stepper>
+
+      </form>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
