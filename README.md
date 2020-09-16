@@ -2,6 +2,8 @@
 
 The **Web Encryption Frontend** is a browser-based application that can encrypt and decrypt any files in the web browser on the local device.
 
+[![DOI](https://zenodo.org/badge/296048140.svg)](https://zenodo.org/badge/latestdoi/296048140)
+
 ## Technology
 
 The Web Encryption Frontend is a single page web application based on the Angular framework (version 10). It can be served as a static web page by any web server.
